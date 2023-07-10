@@ -40,4 +40,4 @@ jobs:
         context: './backstageal'
         file: ./backstageal/Dockerfile.dockerbuild
         push: true
-        tags: backstagerp.azurecr.io      
+        tags: backstagerp.azurecr.io/backstage:${{ github.sha }}      
