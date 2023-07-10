@@ -42,6 +42,6 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         context: './backstageal'
-        file: ./backstageal/packages/backend/Dockerfile
+        file: ./backstageal/Dockerfile
         push: true
         tags: backstagerp.azurecr.io      
