@@ -41,8 +41,8 @@ jobs:
         
     - uses: azure/aks-set-context@v3
       with:
-        resource-group: '<resource group name>'
-        cluster-name: '<cluster name>'   
+        resource-group: 'backstage'
+        cluster-name: 'backstageaks'   
         
     - uses: azure/k8s-create-secret@v1
       with:
