@@ -30,10 +30,7 @@ jobs:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-          
-    # - name: Set up Docker Buildx
-    #  uses: docker/setup-buildx-action@v2       
-          
+                      
     - name: Build and push
       uses: docker/build-push-action@v4
       with:
@@ -42,5 +39,26 @@ jobs:
         push: true
         tags: backstagerp.azurecr.io/backstage:${{ github.sha }}
         
+    - uses: azure/aks-set-context@v3
+      with:
+        resource-group: '<resource group name>'
+        cluster-name: '<cluster name>'   
         
+    - uses: azure/k8s-create-secret@v1
+      with:
+        container-registry-url: backstagerp.azurecr.io
+        container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
+        container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+        secret-name: acr-registry-connection
+        namespace: default
         
+    - uses: azure/k8s-deploy@v1
+      with:
+        manifests: |
+          manifests/deployment.yml
+          manifests/service.yml
+        images: |
+          backstagerp.azurecr.io/backstage:${{ github.sha }}
+        imagepullsecrets: |
+          acr-registry-connection
+        namespace: default   
