@@ -41,6 +41,8 @@ jobs:
         
     - uses: azure/aks-set-context@v3
       with:
+        creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
+        allow-no-subscriptions: true
         resource-group: 'backstage'
         cluster-name: 'backstageaks'   
         
