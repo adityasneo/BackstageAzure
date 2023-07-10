@@ -19,10 +19,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         registry-url: https://registry.npmjs.org/ # Needed for auth
         
-    - name: Install yarn
-      run: yarn install
-      working-directory: backstageal
-      
     - uses: Azure/login@v1
       with:
         creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
