@@ -60,8 +60,8 @@ jobs:
     - uses: azure/k8s-deploy@v1
       with:
         manifests: |
-          manifests/deployment.yaml
-          manifests/service.yaml
+          Kubernetes/manifests/deployment.yaml
+          Kubernetes/manifests/service.yaml
         images: |
           backstagerp.azurecr.io/backstage:${{ github.sha }}
         imagepullsecrets: |
