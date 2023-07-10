@@ -25,14 +25,13 @@ jobs:
         
     - uses: azure/login@v1
       with:
-        client-id: ${{ secrets.CLIENT_ID }}
-        tenant-id: ${{ secrets.TENANT_ID }}
-        subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
-
-    - uses: azure/aks-set-context@v3
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    - uses: azure/aks-set-context@v1
       with:
-       resource-group: backstage
-       cluster-name: backstageaks    
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        resource-group: backstage 
+        cluster-name: backstageaks    
         
     - name: 'acr details'
       uses: azure/docker-login@v1
