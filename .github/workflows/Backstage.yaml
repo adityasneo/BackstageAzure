@@ -24,6 +24,13 @@ jobs:
         creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
         allow-no-subscriptions: true
         
+    - uses: azure/aks-set-context@v3
+      with:
+       resource-group: backstage
+       cluster-name: backstageaks
+       admin: 'false'
+       use-kubelogin: 'true'    
+        
     - name: 'acr details'
       uses: azure/docker-login@v1
       with:
@@ -39,13 +46,7 @@ jobs:
         push: true
         tags: backstagerp.azurecr.io/backstage:${{ github.sha }}
         
-    - uses: azure/aks-set-context@v3
-      with:
-        creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
-        allow-no-subscriptions: true
-        resource-group: 'backstage'
-        cluster-name: 'backstageaks'   
-        
+ 
     - uses: azure/k8s-create-secret@v1
       with:
         container-registry-url: backstagerp.azurecr.io
