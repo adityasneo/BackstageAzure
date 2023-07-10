@@ -27,3 +27,18 @@ jobs:
       with:
         creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
         allow-no-subscriptions: true
+        
+    - name: 'acr details'
+      uses: azure/docker-login@v1
+      with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+          
+    - name: Build and push
+      uses: docker/build-push-action@v4
+      with:
+        context: './backstageal'
+        file: ./backstageal/Dockerfile
+        push: true
+        tags: cortexmodel.azurecr.io/backstage:${{ github.sha }}      
