@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backstage
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backstage
+  template:
+    metadata:
+      labels:
+        app: backstage
+    spec:
+      containers:
+        - name: backstage
+          image: backstagerp.azurecr.io/backstage:${{ github.sha }}
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
