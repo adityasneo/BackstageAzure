@@ -14,7 +14,7 @@ variables:
   dockerRegistryServiceConnection: '46599936-171e-4d13-91ad-d52d7fc9dfe9'
   imageRepository: 'backstageazure'
   containerRegistry: 'backstagerp.azurecr.io'
-  dockerfilePath: '**/Dockerfile'
+  dockerfilePath: 'backstageal/Dockerfile.dockerbuild'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'backstagerp203717b4-auth'
 
