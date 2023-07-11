@@ -19,7 +19,7 @@ variables:
   imagePullSecret: 'backstagerp501c-auth'
 
   # Agent VM image name
-  vmImageName: 'ubuntu-latest'
+  vmImageName: 'bapool'
 
 
 stages:
