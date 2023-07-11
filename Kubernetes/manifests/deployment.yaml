@@ -1,8 +1,9 @@
+# kubernetes/backstage.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backstage
-  namespace: default
+  namespace: backstage
 spec:
   replicas: 1
   selector:
