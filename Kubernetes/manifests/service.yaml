@@ -1,10 +1,10 @@
-# kubernetes/backstage-service.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: backstage
   namespace: default
 spec:
+  type: LoadBalancer
   selector:
     app: backstage
   ports:
