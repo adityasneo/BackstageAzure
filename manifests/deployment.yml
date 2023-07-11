@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: adityarp 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: adityarp
+  template:
+    metadata:
+      labels:
+        app: adityarp 
+    spec:
+      containers:
+        - name: adityarp 
+          image: backstagerp.azurecr.io/adityarp
+          ports:
+          - containerPort: 80
