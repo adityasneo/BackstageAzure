@@ -66,4 +66,4 @@ jobs:
           backstagerp.azurecr.io/backstage:${{ github.sha }}
         imagepullsecrets: |
           acr-registry-connection
-        namespace: default   
+        namespace: backstage   
