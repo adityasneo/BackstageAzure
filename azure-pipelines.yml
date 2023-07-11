@@ -18,7 +18,7 @@ variables:
   tag: '$(Build.BuildId)'
   imagePullSecret: 'backstagerp19508349-auth'
 
-pool: abpool
+pool: bapool
 
 stages:
 - stage: Build
