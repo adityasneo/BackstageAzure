@@ -18,7 +18,8 @@ variables:
   tag: '$(Build.BuildId)'
   imagePullSecret: 'backstagerp203717b4-auth'
 
-  pool: bapool
+  pool:
+    vmImage: 'ubuntu-latest'
 
 
 stages:
