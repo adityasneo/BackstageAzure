@@ -24,16 +24,12 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_container_registry" "acr" {
-  name                = var.azurerm_container_registry
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-  sku                 = "Premium"
-  admin_enabled       = false
-  georeplications {
-    location                = "Central India"
-    zone_redundancy_enabled = true
-    tags                    = {}
-  }
+  name                     = "containerRegistry1"
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = azurerm_resource_group.rg.location
+  sku                      = "Premium"
+  admin_enabled            = false
+}
 
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = var.cluster_name
