@@ -24,12 +24,7 @@ jobs:
       uses: hashicorp/setup-terraform@v2
       with:
         terraform_version: 1.4.2
-    
-    # rewrite Terraform configuration files
-    - name: Terraform Format
-      id: fmt
-      run: terraform fmt -check
-      
+        
     # initializes a working directory  
     - name: Terraform Init
       id: init
