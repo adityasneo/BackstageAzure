@@ -41,11 +41,10 @@ jobs:
       working-directory: ./Terraform
       
       
-    # Creats the Infra Resource  
-    - name: Terraform Apply
-      run: terraform apply -auto-approve 
-      working-directory: ./Terraform
+    
+    #- run: terraform apply -auto-approve 
+    #  working-directory: ./Terraform
 
     
-    #- run: terraform destroy --auto-approve
-    #  working-directory: ./Terraform
+    - run: terraform destroy --auto-approve
+      working-directory: ./Terraform
