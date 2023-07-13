@@ -1,0 +1,59 @@
+name: 'Terraform'
+on: 
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+     run:
+      # We keep Terraform files in the terraform directory.
+        working-directory: ./Terraform
+  
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    
+    # Login to Azure
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}  
+        
+    # Setups the Terraform with required Version        
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.4.2
+    
+    # rewrite Terraform configuration files
+    - name: Terraform Format
+      id: fmt
+      run: terraform fmt -check
+      
+    # initializes a working directory  
+    - name: Terraform Init
+      id: init
+      run: terraform init  
+      
+    # validate the syntax  
+    - name: Terraform Validate
+      id: validate
+      run: terraform validate -no-color 
+      
+    # preview the changes in Configuration files   
+    - name: Terraform Plan
+      id: plan
+      if: github.event_name == 'pull_request'
+      run: terraform plan -no-color -input=false
+      continue-on-error: true
+      
+    # Status of the Terraform Plan  
+    - name: Terraform Plan Status
+      if: steps.plan.outcome == 'failure'
+      run: exit 1   
+      
+    # Creats the Infra Resource  
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terraform apply -auto-approve -input=false
