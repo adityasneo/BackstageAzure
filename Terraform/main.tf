@@ -23,7 +23,7 @@ data "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_container_registry" "acr" {
-  name                     = "containerRegistry1"
+  name                     = "var.azurerm_container_registry"
   resource_group_name      = data.azurerm_resource_group.rg.name
   location                 = data.azurerm_resource_group.rg.location
   sku                      = "Premium"
