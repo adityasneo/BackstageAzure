@@ -18,7 +18,7 @@ variable "azurerm_container_registry" {
 
 variable "cluster_name" {
   type        = string
-  default     = "backstageaks"
+  default     = "backstageks"
   description = "AKS name in Azure"
 }
 
