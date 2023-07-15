@@ -37,6 +37,10 @@ stages:
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
+    - task: PublishPipelineArtifact@1
+      inputs:
+        artifactName: 'manifests'
+        path: 'manifests'
 
 - stage: Deploy
   displayName: Deploy stage
@@ -52,6 +56,10 @@ stages:
       runOnce:
         deploy:
           steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              artifactName: 'manifests'
+              downloadPath: '$(System.ArtifactsDirectory)/manifests'
           - task: KubernetesManifest@0
             displayName: Create imagePullSecret
             inputs:
@@ -64,8 +72,8 @@ stages:
             inputs:
               action: deploy
               manifests: |
-                Kubernetes/manifests/deployment.yaml
-                Kubernetes/manifests/service.yaml
+                $(System.ArtifactsDirectory)/manifests/deployment.yaml
+                $(System.ArtifactsDirectory)/manifests/service.yaml
               imagePullSecrets: |
                 $(imagePullSecret)
               containers: |
