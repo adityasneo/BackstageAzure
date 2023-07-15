@@ -1,8 +1,12 @@
+trigger:
+- main
 
-
-
+pool:
+  vmImage: 'windows-latest'
 
 - task: TerraformInstaller
   displayName: install terraform
   inputs:
     terraformVersion: latest
+
+    
