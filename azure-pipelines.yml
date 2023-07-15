@@ -38,9 +38,6 @@ stages:
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
 
-    - upload: manifests
-      artifact: manifests
-
 - stage: Deploy
   displayName: Deploy stage
   dependsOn: Build
