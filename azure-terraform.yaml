@@ -1,18 +1,21 @@
+name: "Terraform Plan"
+
 trigger:
-- main
+  branches:
+    include:
+      - main
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
-stages:
-  - stage: Build
-    jobs:
-      - job: Terraform
-        displayName: Terraform
-        continueOnError: false
-        pool:
-          vmImage: $(vmImage)
-        steps:
-          - task: TerraformInstaller@1
-            inputs:
-              terraformVersion: 'latest'
+steps:
+
+- task: TerraformInstaller@0
+  displayName: "Install Terraform"
+  inputs:
+    terraformVersion: '1.3.9'
+
+- script: |
+    terraform init
+    terraform plan -out=terraform.tfplan
+  displayName: 'Terraform Plan'
