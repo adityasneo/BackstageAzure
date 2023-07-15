@@ -1,19 +1,23 @@
-apiVersion : apps/v1
+# kubernetes/backstage.yaml
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: adityarp 
+  name: backstage
+  namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: adityarp
+      app: backstage
   template:
     metadata:
       labels:
-        app: adityarp 
+        app: backstage
     spec:
       containers:
-        - name: adityarp 
-          image: backstagerp.azurecr.io/adityarp
+        - name: backstage
+          image: backstagerp.azurecr.io/backstageimage:latest
+          imagePullPolicy: IfNotPresent
           ports:
-          - containerPort: 80
+            - name: http
+              containerPort: 3000
