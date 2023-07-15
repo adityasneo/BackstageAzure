@@ -11,7 +11,7 @@ stages:
         displayName: Terraform
         continueOnError: false
         pool:
-          vmImage: $(vmImageName)
+          vmImage: $(vmImage)
         steps:
           - task: TerraformInstaller@1
             inputs:
