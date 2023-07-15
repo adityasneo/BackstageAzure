@@ -7,8 +7,8 @@ pool:
 stages:
   - stage: Build
     jobs:
-      - job: Terraform_Plan
-        displayName: Terraform Plan - Publish a package if Infrastructure changes are identified
+      - job: Terraform
+        displayName: Terraform
         continueOnError: false
         pool:
           vmImage: $(vmImageName)
