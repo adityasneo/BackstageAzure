@@ -1,0 +1,8 @@
+
+
+
+
+- task: TerraformInstaller
+  displayName: install terraform
+  inputs:
+    terraformVersion: latest
