@@ -72,8 +72,8 @@ stages:
             inputs:
               action: deploy
               manifests: |
-                $(System.ArtifactsDirectory)/manifests/deployment.yaml
-                $(System.ArtifactsDirectory)/manifests/service.yaml
+                $(System.ArtifactsDirectory)/Kubernetes/manifests/deployment.yaml
+                $(System.ArtifactsDirectory)/Kubernetes/manifests/service.yaml
               imagePullSecrets: |
                 $(imagePullSecret)
               containers: |
