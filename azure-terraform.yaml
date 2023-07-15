@@ -4,9 +4,19 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-- task: TerraformInstaller
-  displayName: install terraform
-  inputs:
-    terraformVersion: latest
+stages:
+  - stage: Build
+    jobs:
+      - job: Terraform_Plan
+        displayName: Terraform Plan - Publish a package if Infrastructure changes are identified
+        continueOnError: false
+        pool:
+          vmImage: $(vmImageName)
+        steps:
+          - task: TerraformInstaller
+            displayName: install terraform
+            inputs:
+               terraformVersion: latest
+
 
     
