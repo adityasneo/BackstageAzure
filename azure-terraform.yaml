@@ -20,6 +20,6 @@ steps:
 
 - script: |
     terraform init
-    workingDirectory: BackstageAzure/Terraform
+    workingDirectory: Terraform
     terraform plan
-    workingDirectory: BackstageAzure/Terraform
+    workingDirectory: Terraform
