@@ -15,7 +15,6 @@ variables:
   imageRepository: 'backstageimage'
   containerRegistry: 'backstagerp.azurecr.io'
   dockerfilePath: 'backstageal/Dockerfile.dockerbuild'
-  tag: '$(Build.BuildId)'
   imagePullSecret: 'backstagerp17375d76-auth'
 
   # Agent VM image name
@@ -38,8 +37,6 @@ stages:
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
 
     - upload: manifests
       artifact: manifests
@@ -75,5 +72,5 @@ stages:
               imagePullSecrets: |
                 $(imagePullSecret)
               containers: |
-                $(containerRegistry)/$(imageRepository):$(tag)
+                $(containerRegistry)/$(imageRepository)
 
