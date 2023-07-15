@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backstage
-          image: backstagerp.azurecr.io/backstage:${{ github.sha }}
+          image: backstagerp.azurecr.io/backstageimage:${{ github.sha }}
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
