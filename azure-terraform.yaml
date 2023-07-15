@@ -1,5 +1,8 @@
 name: "Terraform Plan"
 
+resources:
+  - self
+
 trigger:
   branches:
     include:
