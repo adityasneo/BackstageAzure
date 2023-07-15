@@ -17,5 +17,4 @@ steps:
 
 - script: |
     terraform init
-    terraform plan -out=terraform.tfplan
-  displayName: 'Terraform Plan'
+    terraform plan
