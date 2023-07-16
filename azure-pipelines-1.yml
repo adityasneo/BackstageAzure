@@ -16,7 +16,7 @@ variables:
   containerRegistry: 'backstageacr.azurecr.io'
   dockerfilePath: 'backstageal/Dockerfile.dockerbuild'
   tag: '$(Build.BuildId)'
-  imagePullSecret: 'backstagerp103615ce-auth'
+  imagePullSecret: 'backstag-auth'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
