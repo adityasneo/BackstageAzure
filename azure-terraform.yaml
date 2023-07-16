@@ -34,9 +34,11 @@ steps:
     provider: 'azurerm'
     command: 'plan'
     environmentServiceNameAzureRM: 'Free Trial(99766108-3d5d-4929-95ce-f17bc0a2ecd3)'
+    workingDirectory: Terraform
 
 - task: TerraformTaskV4@4
   inputs:
     provider: 'azurerm'
     command: 'apply- auto-approve'
     environmentServiceNameAzureRM: 'Free Trial(99766108-3d5d-4929-95ce-f17bc0a2ecd3)'
+    workingDirectory: Terraform
