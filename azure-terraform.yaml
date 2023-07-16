@@ -10,32 +10,33 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: HashiCorp.Terraform.TerraformCLI@0
-  displayName: 'Install Terraform'
+- task: TerraformInstaller@1
   inputs:
-    command: 'install'
+    terraformVersion: 'latest'
 
-- task: HashiCorp.Terraform.TerraformCLI@0
-  displayName: 'Init Terraform'
+- task: TerraformTaskV4@4
   inputs:
+    provider: 'azurerm'
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+    backendServiceArm: 'Free Trial(99766108-3d5d-4929-95ce-f17bc0a2ecd3)'
+    backendAzureRmResourceGroupName: 'backstage'
+    backendAzureRmStorageAccountName: 'backstagerp'
+    backendAzureRmContainerName: 'backstagecon'
+    backendAzureRmKey: 'tf/terraform.tfstate'
 
-- task:HashiCorp.Terraform.TerraformCLI@0
-  displayName: 'Validate Terraform'
+- task: TerraformTaskV4@4
   inputs:
+    provider: 'azurerm'
     command: 'validate'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
 
-- task: HashiCorp.Terraform.TerraformCLI@0
-  displayName: 'Plan Terraform'
+- task: TerraformTaskV4@4
   inputs:
+    provider: 'azurerm'
     command: 'plan'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-    environmentServiceNameAzureRM: '<AzureRM service connection name>'
+    environmentServiceNameAzureRM: 'Free Trial(99766108-3d5d-4929-95ce-f17bc0a2ecd3)'
 
-- task: HashiCorp.Terraform.TerraformCLI@0
-  displayName: 'Apply Terraform'
+- task: TerraformTaskV4@4
   inputs:
-    command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+    provider: 'azurerm'
+    command: 'apply- auto-approve'
+    environmentServiceNameAzureRM: 'Free Trial(99766108-3d5d-4929-95ce-f17bc0a2ecd3)'
