@@ -1,25 +1,41 @@
-name: "Terraform Plan"
-
-resources:
-- repo: self
-
 trigger:
   branches:
     include:
       - main
 
+resources:
+- repo: self
+
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-
-- task: TerraformInstaller@0
-  displayName: "Install Terraform"
+- task: HashiCorp.Terraform.TerraformCLI@0
+  displayName: 'Install Terraform'
   inputs:
-    terraformVersion: '1.3.9'
+    command: 'install'
 
-- script: |
-    terraform init
-    workingDirectory: Terraform
-    terraform plan
-    workingDirectory: Terraform
+- task: HashiCorp.Terraform.TerraformCLI@0
+  displayName: 'Init Terraform'
+  inputs:
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+
+- task:HashiCorp.Terraform.TerraformCLI@0
+  displayName: 'Validate Terraform'
+  inputs:
+    command: 'validate'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+
+- task: HashiCorp.Terraform.TerraformCLI@0
+  displayName: 'Plan Terraform'
+  inputs:
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+    environmentServiceNameAzureRM: '<AzureRM service connection name>'
+
+- task: HashiCorp.Terraform.TerraformCLI@0
+  displayName: 'Apply Terraform'
+  inputs:
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
