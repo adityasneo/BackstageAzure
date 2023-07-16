@@ -11,7 +11,7 @@ resources:
 variables:
 
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '994ab4e8-ea08-415c-8233-8dffda9df73a'
+  dockerRegistryServiceConnection: '74bb61d9-5a5c-445d-a14f-a0531ecb3b88'
   imageRepository: 'backstage'
   containerRegistry: 'backstageacr.azurecr.io'
   dockerfilePath: 'backstageal/Dockerfile.dockerbuild'
