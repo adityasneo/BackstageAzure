@@ -23,11 +23,13 @@ steps:
     backendAzureRmStorageAccountName: 'backstagerp'
     backendAzureRmContainerName: 'backstagecon'
     backendAzureRmKey: 'tf/terraform.tfstate'
+    workingDirectory: Terraform
 
 - task: TerraformTaskV4@4
   inputs:
     provider: 'azurerm'
     command: 'validate'
+    workingDirectory: Terraform
 
 - task: TerraformTaskV4@4
   inputs:
