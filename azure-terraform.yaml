@@ -15,6 +15,7 @@ steps:
     terraformVersion: '1.4.2'
 
 - task: TerraformTaskV4@4
+  displayName: Init
   inputs:
     provider: 'azurerm'
     command: 'init'
@@ -26,12 +27,14 @@ steps:
     workingDirectory: Terraform
 
 - task: TerraformTaskV4@4
+  displayName: validate
   inputs:
     provider: 'azurerm'
     command: 'validate'
     workingDirectory: Terraform
 
 - task: TerraformTaskV4@4
+  displayName: plan
   inputs:
     provider: 'azurerm'
     command: 'plan'
@@ -39,6 +42,7 @@ steps:
     workingDirectory: Terraform
 
 - task: TerraformTaskV4@4
+  displayName: apply
   inputs:
     provider: 'azurerm'
     command: 'apply'
